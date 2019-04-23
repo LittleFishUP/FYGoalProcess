@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mid-term goal evaluation</title>
+</head>
+<body>
+        <link rel="stylesheet" href="./css/bootstrapV3/css/bootstrap.min.css" type="text/css">
+        <!--[if lt ie 9]>
+            <script src="./css/bootstrapV3/html5shiv.min.js" type="text/javascript"></script>
+            <script src="./css/bootstrapV3/respond.min.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="./css/bootstrapV3/js/jquery.min.js" type="text/javascript"></script>
+        <script src="./css/bootstrapV3/js/bootstrap.min.js" type="text/javascript"></script>
+        <link rel="Stylesheet" type="text/css" href="./css/listDialog.css" />
+        <link rel="stylesheet" type="text/css" href="./css/tcal.css" />
+        <script type="text/javascript" src="./js/tcal.js"></script> 
+        <link href="./css/demo.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container-fluid" style="width: 700px;height: 600px;">
+            <div class="row-fluid">
+                <div class="span12" style="border-radius:10px;border:1px solid #000;margin-top: 30px;margin-bottom: 30px;padding: 20px;">
+                    <div class="row-fluid" style="margin-top: 0px;margin-bottom: 0px;width: 600px;height:220px;overflow-y:scroll;border:1px solid #000;margin-left: 25px;">
+                        <div class="span12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Title
+                                        </th>
+                                        <th>
+                                            Descript
+                                        </th>
+                                        <th>
+                                            Do_Data
+                                        </th>
+                                        <th>
+                                            status
+                                        </th>
+                                        <th>
+                                            Self_Eval
+                                        </th>
+                                        <th>
+                                            Grade
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px dashed #ccc;">
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            1.xxxxxx...
+                                        </td>
+                                        <td>
+                                            01/04/2012
+                                        </td>
+                                        <td>
+                                            Default
+                                        </td>
+                                        <td>
+                                            xxxxxx
+                                        </td>
+                                        <td>
+                                            Excellent
+                                        </td>
+                                        <td>
+                                            <a href="#" id="updatelist">update</a>
+                                        </td>
+                                    </tr>
+                                    <div id="LoginBox">
+                                        <form class="contact" action="#" method="post" id="form">
+                                            <div class="row1" style="background:#858585"> 
+                                                <span style="font-size:30px"> Detailed Window</span><a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+                                            </div>
+                                            <div>
+                                                <div class="lbl">
+                                                    <label for="text">Title</label>
+                                                </div>
+                                                <div class="ctrl">
+                                                    <input type="text" id="Title" name="Title" value="001" readonly>
+                                                </div>
+                                        
+                                                <div class="lb2">
+                                                    <label for="text">Descript</label>
+                                                </div>
+                                                <div class="ctrl">
+                                                    <textarea placeholder="1.xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
+                                                </div>
+                                        
+                                                <div class="lb3">
+                                                    <label for="text">Do_Data</label>
+                                                </div>
+                                                <div class="ctrl" style="width:120px;">
+                                                    <input type="text" name="date" class="tcal" />
+                                                </div>
+                                        
+                                                <div class="lb4">
+                                                    <label for="text">status</label>
+                                                </div>
+                                                <div class="ctrl">
+                                                    <select>
+                                                        <option value="Complete">Complete</option>
+                                                        <option value="Going">Going</option>
+                                                        <option value="Default">Default</option>
+                                                        <option value="Pending">Pending</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="lb5">
+                                                        <label for="text">Self-Eval</label>
+                                                    </div>
+                                                    <div class="ctrl">
+                                                        <textarea placeholder="xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="lb6">
+                                                        <label for="text">Grade</label>
+                                                    </div>
+                                                    <div class="ctrl">
+                                                        <select>
+                                                            <option value="Complete">Errand</option>
+                                                            <option value="Going">General</option>
+                                                            <option value="Default">Excellent</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                            <div>
+                                                <div class="span10 offset2">
+                                                    <input type="submit" name="submit" id="submit" class="submit" value="submit">
+                                                </div>
+                                            </div>
+                                        </form>
+                                         
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                    <button class="btn btn-success" type="button" style="margin-left: 25px;">submit</button>
+                    <button class="btn btn-success" type="button" style="margin-left: 2px;">save</button>
+                    <button class="btn btn-success" type="button" style="margin-left: 2px;">cancel</button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //弹出窗口
+            $(function ($) {
+                $("#updatelist").hover(function () {
+                    $(this).stop().animate({
+                        opacity: '1'
+                    }, 600);
+                }, function () {
+                    $(this).stop().animate({
+                        opacity: '0.6'
+                    }, 1000);
+                }).on('click', function () {
+                    $("body").append("<div id='mask'></div>");
+                    $("#mask").addClass("mask").fadeIn("slow");
+                    $("#LoginBox").fadeIn("slow");
+                });
+                //关闭
+                $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
+                    $("#LoginBox").fadeOut("fast");
+                    $("#mask").css({ display: 'none' });
+                });
+            });
+            </script>	
+</body>
+</html>
