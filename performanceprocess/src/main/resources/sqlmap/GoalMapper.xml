@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dxc.activitidemo.performanceprocess.dao.GoalMapper">
+  <resultMap id="BaseResultMap" type="com.dxc.activitidemo.performanceprocess.entity.Goal">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="Describe" jdbcType="VARCHAR" property="describe" />
+    <result column="Do_Data" jdbcType="TIMESTAMP" property="doData" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="Type" jdbcType="CHAR" property="type" />
+    <result column="Readonly" jdbcType="BIT" property="readonly" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, Title, Describe, Do_Data, status, Type, Readonly, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goal
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dxc.activitidemo.performanceprocess.entity.Goal">
+    insert into goal (id, Title, Describe, 
+      Do_Data, status, Type, 
+      Readonly, user_id)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{doData,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{readonly,jdbcType=BIT}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxc.activitidemo.performanceprocess.entity.Goal">
+    insert into goal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        Title,
+      </if>
+      <if test="describe != null">
+        Describe,
+      </if>
+      <if test="doData != null">
+        Do_Data,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="readonly != null">
+        Readonly,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="doData != null">
+        #{doData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="readonly != null">
+        #{readonly,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxc.activitidemo.performanceprocess.entity.Goal">
+    update goal
+    <set>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        Describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="doData != null">
+        Do_Data = #{doData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="readonly != null">
+        Readonly = #{readonly,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxc.activitidemo.performanceprocess.entity.Goal">
+    update goal
+    set Title = #{title,jdbcType=VARCHAR},
+      Describe = #{describe,jdbcType=VARCHAR},
+      Do_Data = #{doData,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=CHAR},
+      Readonly = #{readonly,jdbcType=BIT},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
