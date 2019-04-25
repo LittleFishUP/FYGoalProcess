@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableEurekaClient
 @EnableDiscoveryClient
-@MapperScan(value = "com.example.demoactiviti.dao")
+@MapperScan(value = "com.dxc.activitidemo.performanceprocess.dao")
 public class PerformanceprocessApplication {
 
     public static void main(String[] args) {

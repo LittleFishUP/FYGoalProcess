@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:javascript="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,53 +21,34 @@
     <div class="container-fluid" style="width: 700px;height: 600px;">
         <div class="row-fluid">
             <div class="span12" style="border-radius:10px;border:1px solid #000;margin-top: 30px;margin-bottom: 30px;padding: 20px;">
-                 <button class="btn btn-small btn-primary" type="button" style="margin-left: 25px;" id="addlist">+</button>
+                 <button class="btn btn-small btn-primary" href="#" type="button" style="margin-left: 25px;" id="addlist" onclick="addlist()">+</button>
                 <div class="row-fluid" style="margin-top: 0px;margin-bottom: 0px;width: 600px;height:300px;overflow-y:scroll;border:1px solid #000;margin-left: 25px;">
                     <div class="span12">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Title
-                                    </th>
-                                    <th>
-                                        Descript
-                                    </th>
-                                    <th>
-                                        Do_Data
-                                    </th>
-                                    <th>
-                                        status
-                                    </th>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Descript</th>
+                                    <th>Do_Data</th>
+                                    <th>status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="border-bottom:1px dashed #ccc;">
+                                <tr style="border-bottom:1px dashed #ccc;" th:each="mes :${goallists}">
+                                    <td th:text="${mes[goal_id]}"></td>
+                                    <td th:text="${mes[Title]}">TB - Monthly</td>
+                                    <td th:text="${mes[Describe]}">xxxxxx...</td>
+                                    <td th:text="${mes[Do_Data]}">01/04/2012</td>
+                                    <td th:text="${mes[status]}">Default</td>
                                     <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        TB - Monthly
-                                    </td>
-                                    <td>
-                                        xxxxxx...
-                                    </td>
-                                    <td>
-                                        01/04/2012
-                                    </td>
-                                    <td>
-                                        Default
-                                    </td>
-                                    <td>
-                                        <a href="#" id="updatelist">update</a>
+                                        <a class="updatelist"  href="javascript:void(0)"
+                                            th:onclick="updatelist([[${mes[Title]}]],[[${mes[Describe]}]],[[${mes[Do_Data]}]],[[${mes[status]}]])">update</a>
                                     </td>
                                 </tr>
                                 <div id="LoginBox">
-                                    <form class="contact" action="#" method="post" id="form2">
-                                        <div class="row1" style="background:#858585"> 
+                                    <form class="contact" action="#" method="post" id="form">
+                                        <div class="row1" style="background:#858585">
                                             <span style="font-size:30px"> Detailed Window</span><a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
                                         </div>
                                         <div>
@@ -75,28 +56,28 @@
                                                 <label >Title</label>
                                             </div>
                                             <div class="ctrl">
-                                                <input type="text" id="Title2" name="Title2" value="001" readonly>
+                                                <input type="text" id="Title" name="Title" >
                                             </div>
-                                    
+
                                             <div class="lb2">
                                                 <label >Descript</label>
                                             </div>
                                             <div class="ctrl">
-                                                <textarea placeholder="1.xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
+                                                <textarea id="Describe" placeholder="1.xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
                                             </div>
-                                    
+
                                             <div class="lb3">
                                                 <label >Do_Data</label>
                                             </div>
                                             <div class="ctrl" style="width:120px;">
-                                                <input type="text" name="date" class="tcal" />
+                                                <input id="Do_Data" type="text" name="date" class="tcal" />
                                             </div>
-                                    
+
                                             <div class="lb4">
                                                 <label >status</label>
                                             </div>
                                             <div class="ctrl">
-                                                <select>
+                                                <select id="status">
                                                     <option value="Complete">Complete</option>
                                                     <option value="Going">Going</option>
                                                     <option value="Default">Default</option>
@@ -104,14 +85,14 @@
                                                 </select>
                                             </div>
                                         </div>
-                                                
+
                                         <div>
                                             <div class="span10 offset2">
-                                                <input type="submit" name="submit" id="submit2" class="submit" value="submit">
+                                                <input type="submit" name="submit" id="submit2" class="submit" value="save">
                                             </div>
                                         </div>
                                     </form>
-                                     
+
                                 </div>
                             </tbody>
                         </table>
@@ -132,12 +113,9 @@
                 $(this).stop().animate({
                     opacity: '0.6'
                 }, 1000);
-            }).on('click', function () {
-                $("body").append("<div id='mask'></div>");
-                $("#mask").addClass("mask").fadeIn("slow");
-                $("#LoginBox").fadeIn("slow");
             });
-            $("#updatelist").hover(function () {
+
+            $(".updatelist").hover(function () {
                 $(this).stop().animate({
                     opacity: '1'
                 }, 600);
@@ -145,17 +123,35 @@
                 $(this).stop().animate({
                     opacity: '0.6'
                 }, 1000);
-            }).on('click', function () {
-                $("body").append("<div id='mask'></div>");
-                $("#mask").addClass("mask").fadeIn("slow");
-                $("#LoginBox").fadeIn("slow");
             });
+
             //关闭
             $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
                 $("#LoginBox").fadeOut("fast");
                 $("#mask").css({ display: 'none' });
             });
         });
+        function updatelist(Title,Describe,Do_Data,Status){
+            $("#Title").attr("readOnly","true");
+            $("#Title").val(Title);
+            $("#Describe").val(Describe);
+            $("#Do_Data").val(Do_Data);
+            $("#status").val(Status);
+
+            $("body").append("<div id='mask'></div>");
+            $("#mask").addClass("mask").fadeIn("slow");
+            $("#LoginBox").fadeIn("slow");
+        };
+        function addlist() {
+
+            $("#Title").val("");
+            $("#Describe").val("");
+            $("#Do_Data").val("");
+
+            $("body").append("<div id='mask'></div>");
+            $("#mask").addClass("mask").fadeIn("slow");
+            $("#LoginBox").fadeIn("slow");
+        }
         </script>	
 </body>
 </html>

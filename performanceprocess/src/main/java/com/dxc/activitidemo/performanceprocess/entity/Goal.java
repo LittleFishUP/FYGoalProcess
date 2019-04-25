@@ -1,15 +1,13 @@
 package com.dxc.activitidemo.performanceprocess.entity;
 
-import java.util.Date;
-
 public class Goal {
     private Integer id;
 
     private String title;
 
-    private String describe;
+    private String descri;
 
-    private Date doData;
+    private String doData;
 
     private String status;
 
@@ -35,19 +33,19 @@ public class Goal {
         this.title = title;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescri() {
+        return descri;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescri(String descri) {
+        this.descri = descri;
     }
 
-    public Date getDoData() {
+    public String getDoData() {
         return doData;
     }
 
-    public void setDoData(Date doData) {
+    public void setDoData(String doData) {
         this.doData = doData;
     }
 

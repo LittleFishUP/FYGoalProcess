@@ -2,6 +2,8 @@ package com.dxc.activitidemo.performanceprocess.dao;
 
 import com.dxc.activitidemo.performanceprocess.entity.Goal;
 
+import java.util.List;
+
 public interface GoalMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface GoalMapper {
     int updateByPrimaryKeySelective(Goal record);
 
     int updateByPrimaryKey(Goal record);
+
+    List<Goal> selectByuserid(Integer userid);
 }
