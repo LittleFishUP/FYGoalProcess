@@ -1,6 +1,9 @@
 package com.dxc.activitidemo.performanceprocess.dao;
 
 import com.dxc.activitidemo.performanceprocess.entity.EmEval;
+import com.dxc.activitidemo.performanceprocess.entity.MidTermGoal;
+
+import java.util.List;
 
 public interface EmEvalMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface EmEvalMapper {
     int updateByPrimaryKeySelective(EmEval record);
 
     int updateByPrimaryKey(EmEval record);
+
+    List<MidTermGoal> selectByuserid(Integer userid);
 }

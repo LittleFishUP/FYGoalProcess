@@ -2,6 +2,7 @@ package com.dxc.activitidemo.performanceprocess.controller;
 
 import com.dxc.activitidemo.performanceprocess.dao.*;
 import com.dxc.activitidemo.performanceprocess.entity.Goal;
+import com.dxc.activitidemo.performanceprocess.entity.MidTermGoal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,12 @@ public class mangementController {
     UserMapper userMapper;
 
     /* activitiService */
+
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 
     @RequestMapping("/management")
     public String mangementpage(){
@@ -69,7 +76,30 @@ public class mangementController {
     }
 
     @RequestMapping("/MidTermGoalList")
-    public String MidTermGoalList(){
+    public String MidTermGoalList(Model model){
+        List<MidTermGoal> MidTermGoalenittylist = emEvalMapper.selectByuserid(1);
+
+        List<Map<String,Object>> MidTermGoallists = new ArrayList<Map<String, Object>>();
+
+        /* goal RES1,em_eval e,
+        RES1.`id`,RES1.`Title`,RES1.`Descri`,RES1.`Do_Data`,RES1.`status`
+        ,RES1.`Type`,RES1.`Readonly`,RES1.`user_id`,e.`self_eval`,e.`grade` */
+        for(MidTermGoal midTermGoal:MidTermGoalenittylist){
+            Map<String, Object> MidTermGoallist = new HashMap<String, Object>();
+            MidTermGoallist.put("goal_id",midTermGoal.getId());
+            MidTermGoallist.put("Title",midTermGoal.getTitle());
+            MidTermGoallist.put("Describe",midTermGoal.getDescri());
+            MidTermGoallist.put("Do_Data",midTermGoal.getDoData());
+            MidTermGoallist.put("status",midTermGoal.getStatus());
+            MidTermGoallist.put("Type",midTermGoal.getType());
+            MidTermGoallist.put("Readonly",midTermGoal.getReadonly());
+            MidTermGoallist.put("user_id",midTermGoal.getUserId());
+            MidTermGoallist.put("self_eval",midTermGoal.getSelfEval());
+            MidTermGoallist.put("grade",midTermGoal.getGrade());
+            MidTermGoallists.add(MidTermGoallist);
+        }
+
+        model.addAttribute("MidTermGoallists",MidTermGoallists);
         return "MidTermGoalList";
     }
 

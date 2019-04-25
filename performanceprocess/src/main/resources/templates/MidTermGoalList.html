@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,54 +26,27 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            ID
-                                        </th>
-                                        <th>
-                                            Title
-                                        </th>
-                                        <th>
-                                            Descript
-                                        </th>
-                                        <th>
-                                            Do_Data
-                                        </th>
-                                        <th>
-                                            status
-                                        </th>
-                                        <th>
-                                            Self_Eval
-                                        </th>
-                                        <th>
-                                            Grade
-                                        </th>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Descript</th>
+                                        <th>Do_Data</th>
+                                        <th>status</th>
+                                        <th>Self_Eval</th>
+                                        <th>Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="border-bottom:1px dashed #ccc;">
+                                    <tr style="border-bottom:1px dashed #ccc;" th:each="mes :${MidTermGoallists}">
+                                        <td th:text="${mes[goal_id]}"></td>
+                                        <td th:text="${mes[Title]}">TB - Monthly</td>
+                                        <td th:text="${mes[Describe]}">xxxxxx...</td>
+                                        <td th:text="${mes[Do_Data]}">01/04/2012</td>
+                                        <td th:text="${mes[status]}">Default</td>
+                                        <td th:text="${mes[self_eval]}">xxxxxx</td>
+                                        <td th:text="${mes[grade]}">Excellent</td>
                                         <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            TB - Monthly
-                                        </td>
-                                        <td>
-                                            1.xxxxxx...
-                                        </td>
-                                        <td>
-                                            01/04/2012
-                                        </td>
-                                        <td>
-                                            Default
-                                        </td>
-                                        <td>
-                                            xxxxxx
-                                        </td>
-                                        <td>
-                                            Excellent
-                                        </td>
-                                        <td>
-                                            <a href="#" id="updatelist">update</a>
+                                            <a href="#" class="evallist"
+                                               th:onclick="Evallist([[${mes[Title]}]],[[${mes[Describe]}]],[[${mes[Do_Data]}]],[[${mes[status]}]],[[${mes[self_eval]}]],[[${mes[grade]}]])">Eval</a>
                                         </td>
                                     </tr>
                                     <div id="LoginBox">
@@ -86,28 +59,28 @@
                                                     <label>Title</label>
                                                 </div>
                                                 <div class="ctrl">
-                                                    <input type="text" id="Title" name="Title" value="001" readonly>
+                                                    <input type="text" id="Title" name="Title" value="001" >
                                                 </div>
                                         
                                                 <div class="lb2">
                                                     <label >Descript</label>
                                                 </div>
                                                 <div class="ctrl">
-                                                    <textarea placeholder="1.xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
+                                                    <textarea id="Descript" placeholder="1.xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
                                                 </div>
                                         
                                                 <div class="lb3">
                                                     <label >Do_Data</label>
                                                 </div>
                                                 <div class="ctrl" style="width:120px;">
-                                                    <input type="text" name="date" class="tcal" />
+                                                    <input id="Do_Data" type="text" name="date" class="tcal" />
                                                 </div>
                                         
                                                 <div class="lb4">
                                                     <label >status</label>
                                                 </div>
                                                 <div class="ctrl">
-                                                    <select>
+                                                    <select id="status">
                                                         <option value="Complete">Complete</option>
                                                         <option value="Going">Going</option>
                                                         <option value="Default">Default</option>
@@ -119,7 +92,7 @@
                                                         <label >Self-Eval</label>
                                                     </div>
                                                     <div class="ctrl">
-                                                        <textarea placeholder="xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
+                                                        <textarea id="Self-Eval" placeholder="xxxxxx" style="width:300px;resize: none;" rows="6" wrap="virtual"></textarea>
                                                     </div>
                                                 </div>
 
@@ -127,16 +100,16 @@
                                                         <label >Grade</label>
                                                     </div>
                                                     <div class="ctrl">
-                                                        <select>
-                                                            <option value="Complete">Errand</option>
-                                                            <option value="Going">General</option>
-                                                            <option value="Default">Excellent</option>
+                                                        <select id="Grade">
+                                                            <option value="Errand">Errand</option>
+                                                            <option value="General">General</option>
+                                                            <option value="Excellent">Excellent</option>
                                                         </select>
                                                     </div>
                                                     
                                             <div>
                                                 <div class="span10 offset2">
-                                                    <input type="submit" name="submit" id="submit" class="submit" value="submit">
+                                                    <input type="submit" name="submit" id="submit" class="submit" value="save">
                                                 </div>
                                             </div>
                                         </form>
@@ -155,7 +128,7 @@
         <script type="text/javascript">
             //弹出窗口
             $(function ($) {
-                $("#updatelist").hover(function () {
+                $(".evallist").hover(function () {
                     $(this).stop().animate({
                         opacity: '1'
                     }, 600);
@@ -163,17 +136,29 @@
                     $(this).stop().animate({
                         opacity: '0.6'
                     }, 1000);
-                }).on('click', function () {
-                    $("body").append("<div id='mask'></div>");
-                    $("#mask").addClass("mask").fadeIn("slow");
-                    $("#LoginBox").fadeIn("slow");
                 });
+
                 //关闭
                 $(".close_btn").hover(function () { $(this).css({ color: 'black' }) }, function () { $(this).css({ color: '#999' }) }).on('click', function () {
                     $("#LoginBox").fadeOut("fast");
                     $("#mask").css({ display: 'none' });
                 });
             });
+            function Evallist(Title,Describe,Do_Data,Status,SelfEval,Grade) {
+
+                $("#Title").attr("readOnly","true");
+                $("#Title").val(Title);
+                $("#Describe").val(Describe);
+                $("#Do_Data").val(Do_Data);
+                $("#status").val(Status);
+                $("#Self-Eval").val(SelfEval);
+                $("#Grade").val(Grade);
+
+                $("body").append("<div id='mask'></div>");
+                $("#mask").addClass("mask").fadeIn("slow");
+                $("#LoginBox").fadeIn("slow");
+
+            }
             </script>	
 </body>
 </html>

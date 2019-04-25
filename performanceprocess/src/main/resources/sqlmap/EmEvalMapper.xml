@@ -6,6 +6,18 @@
     <result column="self_eval" jdbcType="VARCHAR" property="selfEval" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
+  <resultMap id="MidTermGoal" type="com.dxc.activitidemo.performanceprocess.entity.MidTermGoal">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="Descri" jdbcType="VARCHAR" property="descri" />
+    <result column="Do_Data" jdbcType="VARCHAR" property="DoData" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="Type" jdbcType="CHAR" property="type"/>
+    <result column="Readonly" jdbcType="BIT" property="readonly" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="self_eval" jdbcType="VARCHAR" property="SelfEval" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, self_eval, grade
   </sql>
@@ -14,6 +26,22 @@
     <include refid="Base_Column_List" />
     from em_eval
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByuserid" parameterType="java.lang.Integer" resultMap="MidTermGoal">
+    SELECT DISTINCT
+    RES1.id,
+    RES1.Title,
+    RES1.Descri,
+    RES1.Do_Data,
+    RES1.status,
+    RES1.Type,
+    RES1.Readonly,
+    RES1.user_id,
+    e.self_eval,
+    e.grade
+    FROM goal RES1
+    INNER JOIN em_eval e ON e.id=RES1.user_id
+    WHERE RES1.user_id= #{userid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from em_eval
