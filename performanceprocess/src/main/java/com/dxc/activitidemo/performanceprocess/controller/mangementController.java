@@ -1,6 +1,7 @@
 package com.dxc.activitidemo.performanceprocess.controller;
 
 import com.dxc.activitidemo.performanceprocess.dao.*;
+import com.dxc.activitidemo.performanceprocess.entity.CheckEmGoal;
 import com.dxc.activitidemo.performanceprocess.entity.Goal;
 import com.dxc.activitidemo.performanceprocess.entity.MidTermGoal;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class mangementController {
     @Resource
     GoalMapper goalMapper;
     @Resource
-    GroupMapper groupMapper;
+    TeamMapper teamMapper;
     @Resource
     MrEvalMapper mrEvalMapper;
     @Resource
@@ -104,7 +105,25 @@ public class mangementController {
     }
 
     @RequestMapping("/CheckEmGoal")
-    public String CheckEmGoal(){
+    public String CheckEmGoal(Model model){
+        List<CheckEmGoal> CheckEmGoalenittylist = teamMapper.selectByuserid(3);
+
+        List<Map<String,Object>> CheckEmGoallists = new ArrayList<Map<String, Object>>();
+
+        for(CheckEmGoal checkEmGoal:CheckEmGoalenittylist){
+            Map<String, Object> CheckEmGoallist = new HashMap<String, Object>();
+            CheckEmGoallist.put("userId",checkEmGoal.getUserid());
+            CheckEmGoallist.put("name",checkEmGoal.getName());
+            CheckEmGoallist.put("Group",checkEmGoal.getGroup());
+            CheckEmGoallist.put("Title",checkEmGoal.getTitle());
+            CheckEmGoallist.put("describe",checkEmGoal.getDescript());
+            CheckEmGoallist.put("DOData",checkEmGoal.getDoData());
+            CheckEmGoallist.put("Status",checkEmGoal.getStatus());
+            CheckEmGoallists.add(CheckEmGoallist);
+        }
+
+        model.addAttribute("CheckEmGoallists",CheckEmGoallists);
+
         return "CheckEmGoal";
     }
 

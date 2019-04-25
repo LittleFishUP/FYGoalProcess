@@ -1,11 +1,11 @@
 package com.dxc.activitidemo.performanceprocess.entity;
 
-public class Group {
+public class Team {
     private Integer id;
 
     private String gName;
 
-    private String gManger;
+    private Integer managerId;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class Group {
         this.gName = gName;
     }
 
-    public String getgManger() {
-        return gManger;
+    public Integer getManagerId() {
+        return managerId;
     }
 
-    public void setgManger(String gManger) {
-        this.gManger = gManger;
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
     }
 }
