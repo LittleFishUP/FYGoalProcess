@@ -6,6 +6,17 @@
     <result column="MR_eval" jdbcType="VARCHAR" property="mrEval" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
+  <resultMap id="MrEvalGoalMap" type="com.dxc.activitidemo.performanceprocess.entity.EmployeeGoalEval">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="G_name" jdbcType="VARCHAR" property="Group" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="Descri" jdbcType="VARCHAR" property="descri" />
+    <result column="Do_Data" jdbcType="VARCHAR" property="doData" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="MR_eval" jdbcType="VARCHAR" property="mrEval" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, MR_eval, grade
   </sql>
@@ -14,6 +25,23 @@
     <include refid="Base_Column_List" />
     from mr_eval
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByuserid" parameterType="java.lang.Integer" resultMap="MrEvalGoalMap">
+  SELECT DISTINCT
+  g.`id`,
+  u.`name`,
+  t.`G_name`,
+  g.`Title`,
+  g.`Descri`,
+  g.`Do_Data`,
+  g.`status`,
+  m.`MR_eval`,
+  m.`grade`
+  FROM team t
+  LEFT JOIN USER u ON u.`Groupid`= t.`id`
+  LEFT JOIN goal g ON g.`user_id`= u.`id`
+  LEFT JOIN mr_eval m ON m.`id`=g.`id`
+  WHERE t.`Manager_id`= #{userid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mr_eval

@@ -1,6 +1,9 @@
 package com.dxc.activitidemo.performanceprocess.dao;
 
+import com.dxc.activitidemo.performanceprocess.entity.EmployeeGoalEval;
 import com.dxc.activitidemo.performanceprocess.entity.MrEval;
+
+import java.util.List;
 
 public interface MrEvalMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,7 @@ public interface MrEvalMapper {
     int updateByPrimaryKeySelective(MrEval record);
 
     int updateByPrimaryKey(MrEval record);
+
+    List<EmployeeGoalEval> selectByuserid(Integer userid);
+
 }

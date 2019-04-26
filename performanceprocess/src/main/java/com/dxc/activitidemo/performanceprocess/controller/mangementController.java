@@ -2,6 +2,7 @@ package com.dxc.activitidemo.performanceprocess.controller;
 
 import com.dxc.activitidemo.performanceprocess.dao.*;
 import com.dxc.activitidemo.performanceprocess.entity.CheckEmGoal;
+import com.dxc.activitidemo.performanceprocess.entity.EmployeeGoalEval;
 import com.dxc.activitidemo.performanceprocess.entity.Goal;
 import com.dxc.activitidemo.performanceprocess.entity.MidTermGoal;
 import org.springframework.stereotype.Controller;
@@ -82,9 +83,7 @@ public class mangementController {
 
         List<Map<String,Object>> MidTermGoallists = new ArrayList<Map<String, Object>>();
 
-        /* goal RES1,em_eval e,
-        RES1.`id`,RES1.`Title`,RES1.`Descri`,RES1.`Do_Data`,RES1.`status`
-        ,RES1.`Type`,RES1.`Readonly`,RES1.`user_id`,e.`self_eval`,e.`grade` */
+
         for(MidTermGoal midTermGoal:MidTermGoalenittylist){
             Map<String, Object> MidTermGoallist = new HashMap<String, Object>();
             MidTermGoallist.put("goal_id",midTermGoal.getId());
@@ -103,7 +102,9 @@ public class mangementController {
         model.addAttribute("MidTermGoallists",MidTermGoallists);
         return "MidTermGoalList";
     }
-
+    /*
+    * MR menu
+    * */
     @RequestMapping("/CheckEmGoal")
     public String CheckEmGoal(Model model){
         List<CheckEmGoal> CheckEmGoalenittylist = teamMapper.selectByuserid(3);
@@ -128,7 +129,28 @@ public class mangementController {
     }
 
     @RequestMapping("/EmployeeGoalEvaluation")
-    public String EmployeeGoalEvaluation(){
+    public String EmployeeGoalEvaluation(Model model){
+
+        List<EmployeeGoalEval> EmployeeGoalEvalenittylist = mrEvalMapper.selectByuserid(3);
+
+        List<Map<String,Object>> EmployeeGoalEvallists = new ArrayList<Map<String, Object>>();
+
+        for(EmployeeGoalEval employeeGoalEval:EmployeeGoalEvalenittylist){
+            Map<String, Object> CheckEmGoallist = new HashMap<String, Object>();
+            CheckEmGoallist.put("Goal_id",employeeGoalEval.getId());
+            CheckEmGoallist.put("name",employeeGoalEval.getName());
+            CheckEmGoallist.put("Group",employeeGoalEval.getGroup());
+            CheckEmGoallist.put("Title",employeeGoalEval.getTitle());
+            CheckEmGoallist.put("Describe",employeeGoalEval.getDescri());
+            CheckEmGoallist.put("Do_Data",employeeGoalEval.getDoData());
+            CheckEmGoallist.put("status",employeeGoalEval.getStatus());
+            CheckEmGoallist.put("Mr_eval",employeeGoalEval.getMrEval());
+            CheckEmGoallist.put("grade",employeeGoalEval.getGrade());
+            EmployeeGoalEvallists.add(CheckEmGoallist);
+        }
+
+        model.addAttribute("EmployeeGoalEvallists",EmployeeGoalEvallists);
+
         return "EmployeeGoalEvaluation";
     }
 
