@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,52 +20,30 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Title
-                                    </th>
-                                    <th>
-                                        Descript
-                                    </th>
-                                    <th>
-                                        Self-Eval
-                                    </th>
-                                    <th>
-                                        MR-Eval
-                                    </th>
-                                    <th>
-                                        MR-Grade
-                                    </th>
+                                    <th>GoalID</th>
+                                    <th>Name</th>
+                                    <th>Group</th>
+                                    <th>Manger</th>
+                                    <th>Title</th>
+                                    <th>Descript</th>
+                                    <th>status</th>
+                                    <th>Self-Eval</th>
+                                    <th>MR-Eval</th>
+                                    <th>MR-Grade</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="border-bottom:1px dashed #ccc;">
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        001
-                                    </td>
-                                    <td>
-                                        TB - Monthly
-                                    </td>
-                                    <td>
-                                        xxxxxx
-                                    </td>
-                                    <td>
-                                        xxxxxx
-                                    </td>
-                                    <td>
-                                        xxxxxxx
-                                    </td>
-                                    <td>
-                                        Excellent
-                                    </td>
+                                <tr style="border-bottom:1px dashed #ccc;" th:each="mes :${CheckAllGoallists}">
+                                    <td th:text="${mes[User_id]}">1</td>
+                                    <td th:text="${mes[name]}">001</td>
+                                    <td th:text="${mes[Group]}">001</td>
+                                    <td th:text="${mes[Manager]}">001</td>
+                                    <td th:text="${mes[Title]}">TB - Monthly</td>
+                                    <td th:text="${mes[Describe]}">xxxxxx</td>
+                                    <td th:text="${mes[status]}">xxxxxxx</td>
+                                    <td th:text="${mes[selfEval]}">xxxxxx</td>
+                                    <td th:text="${mes[MREval]}">xxxxxx</td>
+                                    <td th:text="${mes[MRGrade]}">xxxxxx</td>
                                 </tr>
                             </tbody>
                         </table>

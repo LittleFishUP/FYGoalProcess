@@ -11,6 +11,18 @@
     <result column="Readonly" jdbcType="BIT" property="readonly" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
+  <resultMap id="checkallGoal" type="com.dxc.activitidemo.performanceprocess.entity.CheckAllGoal">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="G_name" jdbcType="VARCHAR" property="Group" />
+    <result column="Manager_id" jdbcType="INTEGER" property="managerId" />
+    <result column="Title" jdbcType="VARCHAR" property="Title" />
+    <result column="Descri" jdbcType="VARCHAR" property="Descript" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="self_eval" jdbcType="VARCHAR" property="SelfEval" />
+    <result column="MR_eval" jdbcType="VARCHAR" property="MREval" />
+    <result column="grade" jdbcType="VARCHAR" property="MRGrade" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, Title, Descri, Do_Data, status, Type, Readonly, user_id
   </sql>
@@ -19,6 +31,24 @@
     <include refid="Base_Column_List" />
     from goal
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectallGoal" resultMap="checkallGoal">
+    select distinct
+    u.`id`,
+    u.`name`,
+    t.`G_name`,
+    t.`Manager_id`,
+    g.`Title`,
+    g.`Descri`,
+    g.`status`,
+    e.`self_eval`,
+    m.`MR_eval`,
+    m.`grade`
+    from goal g
+    left join user u on u.`id`=g.`user_id`
+    left join team t on t.`id`=u.`Groupid`
+    left join mr_eval m on m.`id`=g.`id`
+    left join EM_Eval e on e.`id`=g.`id`
   </select>
   <select id="selectByuserid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select

@@ -1,10 +1,7 @@
 package com.dxc.activitidemo.performanceprocess.controller;
 
 import com.dxc.activitidemo.performanceprocess.dao.*;
-import com.dxc.activitidemo.performanceprocess.entity.CheckEmGoal;
-import com.dxc.activitidemo.performanceprocess.entity.EmployeeGoalEval;
-import com.dxc.activitidemo.performanceprocess.entity.Goal;
-import com.dxc.activitidemo.performanceprocess.entity.MidTermGoal;
+import com.dxc.activitidemo.performanceprocess.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,7 +157,35 @@ public class mangementController {
     }
 
     @RequestMapping("/CheckAllGoal")
-    public String CheckAllGoal(){
+    public String CheckAllGoal(Model model){
+
+        List<CheckAllGoal> CheckAllGoalenittylist = goalMapper.selectallGoal();
+
+        List<Map<String,Object>> CheckAllGoallists = new ArrayList<Map<String, Object>>();
+        for(CheckAllGoal checkAllGoal:CheckAllGoalenittylist){
+            Map<String, Object> CheckAllGoallist = new HashMap<String, Object>();
+            CheckAllGoallist.put("User_id",checkAllGoal.getId());
+            CheckAllGoallist.put("name",checkAllGoal.getName());
+            CheckAllGoallist.put("Group",checkAllGoal.getGroup());
+
+            if(checkAllGoal.getManagerId()==null){
+                CheckAllGoallist.put("Manager","");
+            }else{
+                User user = userMapper.selectByPrimaryKey(checkAllGoal.getManagerId());
+                CheckAllGoallist.put("Manager",user.getName());
+            }
+
+            CheckAllGoallist.put("Title",checkAllGoal.getTitle());
+            CheckAllGoallist.put("Describe",checkAllGoal.getDescript());
+            CheckAllGoallist.put("status",checkAllGoal.getStatus());
+            CheckAllGoallist.put("selfEval",checkAllGoal.getSelfEval());
+            CheckAllGoallist.put("MREval",checkAllGoal.getMREval());
+            CheckAllGoallist.put("MRGrade",checkAllGoal.getMRGrade());
+            CheckAllGoallists.add(CheckAllGoallist);
+        }
+
+        model.addAttribute("CheckAllGoallists",CheckAllGoallists);
+
         return "CheckAllGoal";
     }
 

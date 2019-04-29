@@ -1,5 +1,6 @@
 package com.dxc.activitidemo.performanceprocess.dao;
 
+import com.dxc.activitidemo.performanceprocess.entity.CheckAllGoal;
 import com.dxc.activitidemo.performanceprocess.entity.Goal;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface GoalMapper {
     int updateByPrimaryKey(Goal record);
 
     List<Goal> selectByuserid(Integer userid);
+
+    List<CheckAllGoal> selectallGoal();
 }
