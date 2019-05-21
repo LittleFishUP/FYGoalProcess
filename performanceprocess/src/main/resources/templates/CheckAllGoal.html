@@ -20,7 +20,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>GoalID</th>
+                                    <th>UserID</th>
                                     <th>Name</th>
                                     <th>Group</th>
                                     <th>Manger</th>
@@ -48,7 +48,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <button class="btn btn-success" type="button" style="margin-left:85%;">Print Excel</button>
+                    <a class="btn btn-success" style="margin-left:85%;" th:href="@{/goal/downloadExcel}">Print Excel</a>
                 </div>
             </div>
     
